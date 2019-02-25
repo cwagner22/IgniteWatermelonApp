@@ -1,12 +1,29 @@
-import '../Config'
-import DebugConfig from '../Config/DebugConfig'
-import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import RootContainer from './RootContainer'
-import createStore from '../Redux'
+import "../Config";
+import DebugConfig from "../Config/DebugConfig";
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import RootContainer from "./RootContainer";
+import createStore from "../Redux";
+import DatabaseProvider from "@nozbe/watermelondb/DatabaseProvider";
+import { Database } from "@nozbe/watermelondb";
+import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite";
+
+import { mySchema } from "../Models/schema";
+import Blog from "../Models/Blog";
 
 // create our store
-const store = createStore()
+const store = createStore();
+
+// WatermelonDB
+const adapter = new SQLiteAdapter({
+  dbName: "test",
+  schema: mySchema
+});
+
+const database = new Database({
+  adapter,
+  modelClasses: [Blog]
+});
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js
@@ -18,16 +35,16 @@ const store = createStore()
  * We separate like this to play nice with React Native's hot reloading.
  */
 class App extends Component {
-  render () {
+  render() {
     return (
       <Provider store={store}>
-        <RootContainer />
+        <DatabaseProvider database={database}>
+          <RootContainer database={database} />
+        </DatabaseProvider>
       </Provider>
-    )
+    );
   }
 }
 
 // allow reactotron overlay for fast design in dev mode
-export default DebugConfig.useReactotron
-  ? console.tron.overlay(App)
-  : App
+export default (DebugConfig.useReactotron ? console.tron.overlay(App) : App);

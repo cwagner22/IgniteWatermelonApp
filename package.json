@@ -24,6 +24,7 @@
     "git-hook": "npm run lint -s && npm run test -s"
   },
   "dependencies": {
+    "@nozbe/watermelondb": "^0.10.1",
     "apisauce": "^0.14.2",
     "format-json": "^1.0.3",
     "identity-obj-proxy": "^3.0.0",
@@ -45,6 +46,7 @@
     "seamless-immutable": "^7.1.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.3.0",
     "@storybook/addon-storyshots": "^3.4.0",
     "@storybook/addons": "^3.4.0",
     "@storybook/channels": "^3.4.0",
