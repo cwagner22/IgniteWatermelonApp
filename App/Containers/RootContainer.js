@@ -22,25 +22,24 @@ class RootContainer extends Component {
     }
 
     await database.batch(...blogs);
-    console.log("blogs:", blogs);
-    // const blog = await database.collections.get("blogs").create(blog => {
-    //   blog.name = "test";
-    // });
 
+    // With Reactotron: Out of Memory Error (with 100 records)
     startup(blogs);
   }
 
   componentDidMount() {
-    this.props.startup(this.props.blogs);
-    // console.log("this.props.blogs:", this.props.blogs);
-    // this.generate();
+    const { startup, blogs } = this.props;
+    console.log("blogs:", blogs);
+
+    if (!blogs) {
+      this.generate();
+    } else {
+      // With Reactotron: Disconnect (with 100 records)
+      startup(blogs);
+    }
   }
 
   render() {
-    // const { blogs } = this.props;
-    // if (blogs) {
-    //   this.props.startup(blogs);
-    // }
     return (
       <View style={styles.applicationView}>
         <StatusBar barStyle="light-content" />
@@ -50,11 +49,11 @@ class RootContainer extends Component {
   }
 }
 
-// wraps dispatch to create nicer functions to call within our component
 const mapDispatchToProps = dispatch => ({
   startup: blog => dispatch(StartupActions.startup(blog))
 });
 
+// Many observables to produce the Reactotron issue
 const enhance = withObservables([], ({ database }) => ({
   blogs: database.collections
     .get("blogs")

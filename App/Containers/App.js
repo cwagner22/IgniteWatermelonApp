@@ -19,7 +19,7 @@ const store = createStore();
 
 // WatermelonDB
 const adapter = new SQLiteAdapter({
-  dbName: "test",
+  dbName: "IgniteWatermelonApp",
   schema: mySchema
 });
 

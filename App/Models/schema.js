@@ -27,6 +27,10 @@ export const mySchema = appSchema({
     tableSchema({
       name: "tests",
       columns: [{ name: "name", type: "string" }]
+    }),
+    tableSchema({
+      name: "tests2",
+      columns: [{ name: "name", type: "string" }]
     })
   ]
 });
