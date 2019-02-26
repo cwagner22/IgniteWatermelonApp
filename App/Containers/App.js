@@ -10,6 +10,9 @@ import SQLiteAdapter from "@nozbe/watermelondb/adapters/sqlite";
 
 import { mySchema } from "../Models/schema";
 import Blog from "../Models/Blog";
+import Post from "../Models/Post";
+import Comment from "../Models/Comment";
+import Test from "../Models/Test";
 
 // create our store
 const store = createStore();
@@ -22,7 +25,7 @@ const adapter = new SQLiteAdapter({
 
 const database = new Database({
   adapter,
-  modelClasses: [Blog]
+  modelClasses: [Blog, Post, Comment, Test]
 });
 
 /**

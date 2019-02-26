@@ -3,7 +3,7 @@ import { createActions } from "reduxsauce";
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  startup: ["post"]
+  startup: ["blogs"]
 });
 
 export const StartupTypes = Types;
